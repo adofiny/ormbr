@@ -1,0 +1,97 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6F0C3E52-8B1D-4C7A-9E54-3B2D7A1C9F10}</ProjectGuid>
+        <ProjectVersion>20.1</ProjectVersion>
+        <FrameworkType>VCL</FrameworkType>
+        <AppType>Console</AppType>
+        <MainSource>ORMBrCompileCheck.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <ProjectName Condition="'$(ProjectName)'==''">ORMBrCompileCheck</ProjectName>
+        <TargetedPlatforms>3</TargetedPlatforms>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <!--
+          Pasta-raiz das dependências (DBCBr, DBEBr, CQLBr, JSONBr).
+          Padrão: cache do Boss do usuário. Para usar outra cópia, defina a
+          variável de ambiente ORMBrDepsRoot (Tools > Options > IDE >
+          Environment Variables) ou edite os quatro caminhos abaixo.
+        -->
+        <ORMBrDepsRoot Condition="'$(ORMBrDepsRoot)'==''">$(USERPROFILE)\.boss\cache</ORMBrDepsRoot>
+        <ORMBrDBCBr>$(ORMBrDepsRoot)\8c712318a46b6bb60bf1dbb12541b521_wt\Source</ORMBrDBCBr>
+        <ORMBrDBEBr>$(ORMBrDepsRoot)\67b7b84d4748c4e203d0cd1dd7e00ade_wt\Source</ORMBrDBEBr>
+        <ORMBrCQLBr>$(ORMBrDepsRoot)\0fee84655e5eeb0390e84d653acce3c0_wt\Source</ORMBrCQLBr>
+        <ORMBrJSONBr>$(ORMBrDepsRoot)\97bcbc9b5655abd61a5a9e88fb0f31aa_wt\Source</ORMBrJSONBr>
+        <ORMBrSource>..\..\Source</ORMBrSource>
+        <DCC_UnitSearchPath>$(ORMBrSource);$(ORMBrSource)\Core;$(ORMBrSource)\Criteria;$(ORMBrSource)\Dataset;$(ORMBrSource)\External\SQLite3;$(ORMBrSource)\Livebindings;$(ORMBrSource)\Metadata;$(ORMBrSource)\Middleware;$(ORMBrSource)\Monitor;$(ORMBrSource)\Objectset;$(ORMBrSource)\RESTful\Client;$(ORMBrSource)\RESTful\Common;$(ORMBrSource)\RESTful\Server;$(ORMBrDBCBr);$(ORMBrDBCBr)\Core;$(ORMBrDBCBr)\Drivers;$(ORMBrDBEBr);$(ORMBrDBEBr)\Core;$(ORMBrDBEBr)\Drivers;$(ORMBrCQLBr);$(ORMBrCQLBr)\Core;$(ORMBrCQLBr)\Drivers;$(ORMBrJSONBr);$(ORMBrJSONBr)\Core;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_IncludePath>$(DCC_UnitSearchPath);$(DCC_IncludePath)</DCC_IncludePath>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_DcuOutput>.\dcu\$(ProductVersion)\$(Platform)</DCC_DcuOutput>
+        <DCC_ExeOutput>.\dcu\$(ProductVersion)\$(Platform)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+        <SanitizedProjectName>ORMBrCompileCheck</SanitizedProjectName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_Optimize>false</DCC_Optimize>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType>Application</Borland.ProjectType>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">ORMBrCompileCheck.dpr</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

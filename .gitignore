@@ -1,0 +1,28 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+*.dcu
+*.bpl
+*.map
+*.tvsconfig
+*.txaPackage
+*.local
+*.otares
+*.identcache
+*.stat
+*.exe
+*.map
+*.rsm
+*.json
+__history/
+__recovery/
+Win32/
+Lib/
+# Examples/
+# Examples/Data/
+# Examples/JSON/
+/modules
+
+# Saída do check de compilação (Projects/CompileCheck)
+Projects/CompileCheck/dcu/
+
+# Conexões salvas do Gerador de Modelo (contém usuários e senhas)
+Projects/Gerador Modelo/Connection.xml
